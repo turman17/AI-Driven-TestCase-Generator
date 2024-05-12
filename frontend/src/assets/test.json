@@ -1,0 +1,95 @@
+{
+	"title": "Test Cases for User Story A: Privacy and Cookies Policy Consent",
+	"testCases": [
+		{
+			"testCaseId": "FRONTOFFQC-11962",
+			"title": "Privacy policy consent - Confirm",
+			"description": "This test case describes how the user is prompted to consent to the privacy policy when he resumes an application in progress.",
+			"preConditions": [
+				"The user has accessed an FO form.",
+				"The user has not previously accepted the privacy policy consent."
+			],
+			"requirement": ["REQ-UCC06-010"],
+			"actions": [
+				{
+					"step": "The user opens a new application for the first time.",
+					"expectedResults": [
+						"The system displays an overlay or a modal window that lists the content of the Privacy Policy, with options to review and accept.",
+						"The user can proceed with the current application."
+					]
+				},
+				{
+					"step": "The user accepts the conditions",
+					"expectedResults": [
+						"The user can proceed with the current application.",
+						"The system records the explicit consent of the user together with the date and time stamp of the user’s consent"
+					]
+				}
+			]
+		},
+		{
+			"testCaseId": "FRONTOFFQC-11963",
+			"title": "Cookies policy consent - Confirm",
+			"description": "This test case verifies that the user can give consent to the cookies policy and proceed with the application.",
+			"preConditions": [
+				"The user has accessed an FO form.",
+				"The user has not previously accepted the cookies policy consent."
+			],
+			"requirement": ["REQ-UCC06-020"],
+			"actions": [
+				{
+					"step": "The user starts/resumes an application.",
+					"expectedResults": [
+						"The system displays an overlay (header/footer) that presents the Cookies Policy, with options to review and accept.",
+						"The user is given the option to accept the cookies policy."
+					]
+				},
+				{
+					"step": "The user accepts the cookies policy.",
+					"expectedResults": [
+						"The user can proceed with the application.",
+						"The system enables the necessary cookies for the application."
+					]
+				}
+			]
+		},
+		{
+			"testCaseId": "FRONTOFFQC-11964",
+			"title": "Privacy policy consent - Decline",
+			"description": "This test case checks the system's behavior when the user declines the Privacy Policy consent.",
+			"preConditions": [
+				"The user has accessed an FO form.",
+				"The user is presented with the Privacy Policy consent."
+			],
+			"requirement": ["REQ-UCC06-010"],
+			"actions": [
+				{
+					"step": "The user declines the Privacy Policy consent.",
+					"expectedResults": [
+						"The user cannot proceed with the current application.",
+						"The system retains the user at the initial step of the application."
+					]
+				}
+			]
+		},
+		{
+			"testCaseId": "FRONTOFFQC-11965",
+			"title": "Cookies policy consent - Decline",
+			"description": "This test case verifies the system's response when the user declines the cookies policy consent.",
+			"preConditions": [
+				"The user has accessed an FO form.",
+				"The user is presented with the cookies policy consent."
+			],
+			"requirement": ["REQ-UCC06-020"],
+			"actions": [
+				{
+					"step": "The user declines the cookies policy consent.",
+					"expectedResults": [
+						"The user cannot proceed with the application.",
+						"The system prevents access beyond the initial application step."
+					]
+				}
+			]
+		}
+	]
+}

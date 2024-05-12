@@ -1,0 +1,187 @@
+{
+	"title": "Test Cases for Consent Management on FO Form Access",
+	"testCases": [
+		{
+			"testCaseId": "CMFO-0001",
+			"title": "Privacy Policy Consent - Acceptance",
+			"description": "This test case verifies that the user can successfully accept the Privacy Policy and proceed with the form.",
+			"preConditions": ["The user has accessed an FO form."],
+			"requirement": ["REQ-UCC06-010"],
+			"actions": [
+				{
+					"step": "User accesses the form for the first time.",
+					"expectedResults": [
+						"The system displays a modal with the Privacy Policy content.",
+						"The 'Accept and Close' button is visible."
+					]
+				},
+				{
+					"step": "User clicks on 'Accept and Close'.",
+					"expectedResults": [
+						"The modal closes.",
+						"The system records the user's consent with a timestamp.",
+						"The user can proceed with the form."
+					]
+				}
+			]
+		},
+		{
+			"testCaseId": "CMFO-0002",
+			"title": "Cookies Policy Acceptance",
+			"description": "Ensures the user can accept the Cookies Policy and proceed.",
+			"preConditions": ["The user has accessed an FO form."],
+			"requirement": ["REQ-UCC06-020"],
+			"actions": [
+				{
+					"step": "User accesses the form.",
+					"expectedResults": [
+						"Cookies Policy overlay is displayed with an 'Accept' option."
+					]
+				},
+				{
+					"step": "User selects 'Accept'.",
+					"expectedResults": ["Overlay closes.", "The user can proceed with the form."]
+				}
+			]
+		},
+		{
+			"testCaseId": "CMFO-0003",
+			"title": "Privacy Policy Review and Acceptance",
+			"description": "Tests if the user can review and then accept the Privacy Policy.",
+			"preConditions": ["The user has accessed an FO form."],
+			"requirement": ["REQ-UCC06-010"],
+			"actions": [
+				{
+					"step": "User opens the Privacy Policy to review.",
+					"expectedResults": ["Privacy Policy content is displayed in full."]
+				},
+				{
+					"step": "User clicks 'Accept and Close' after reviewing.",
+					"expectedResults": [
+						"The modal closes.",
+						"User's consent is recorded.",
+						"The user proceeds with the form."
+					]
+				}
+			]
+		},
+		{
+			"testCaseId": "CMFO-0004",
+			"title": "Cookies Acceptance with Privacy Policy Consent",
+			"description": "Verifies user can accept both Cookies and Privacy Policy at the start.",
+			"preConditions": ["User accesses FO form for the first time."],
+			"requirement": ["REQ-UCC06-010", "REQ-UCC06-020"],
+			"actions": [
+				{
+					"step": "User accesses form, accepts Cookies Policy, then accepts Privacy Policy.",
+					"expectedResults": [
+						"User can proceed with the form.",
+						"Both consents are recorded with timestamps."
+					]
+				}
+			]
+		},
+		{
+			"testCaseId": "CMFO-0005",
+			"title": "Multiple Sessions Consent Memory",
+			"description": "Ensures the system remembers user's consent across sessions.",
+			"preConditions": [
+				"User has accepted both Cookies and Privacy Policy in a previous session."
+			],
+			"requirement": ["REQ-UCC06-010", "REQ-UCC06-020"],
+			"actions": [
+				{
+					"step": "User accesses the form again in a new session.",
+					"expectedResults": [
+						"User does not encounter the Privacy or Cookies Policy overlays.",
+						"User can immediately proceed with the form."
+					]
+				}
+			]
+		},
+		{
+			"testCaseId": "CMFO-0010",
+			"title": "Privacy Policy Decline - Session Abort",
+			"description": "Tests system behavior when the Privacy Policy is declined.",
+			"preConditions": ["User accesses FO form for the first time."],
+			"requirement": ["REQ-UCC06-010"],
+			"actions": [
+				{
+					"step": "User declines the Privacy Policy.",
+					"expectedResults": [
+						"User cannot proceed with the form.",
+						"The session is terminated or the user is kept on the initial page."
+					]
+				}
+			]
+		},
+		{
+			"testCaseId": "CMFO-0011",
+			"title": "Cookies Policy Decline - Progress Prevention",
+			"description": "Ensures that declining Cookies Policy prevents progress.",
+			"preConditions": ["User accesses FO form."],
+			"requirement": ["REQ-UCC06-020"],
+			"actions": [
+				{
+					"step": "User declines Cookies Policy.",
+					"expectedResults": [
+						"User cannot proceed with the form.",
+						"User is kept on the initial page or informed to accept cookies to proceed."
+					]
+				}
+			]
+		},
+		{
+			"testCaseId": "CMFO-0012",
+			"title": "Invalid Consent Recording",
+			"description": "Tests system's handling of an invalid or corrupted consent recording.",
+			"preConditions": [
+				"User accesses FO form and accepts Privacy Policy.",
+				"The consent recording operation fails or records invalid data."
+			],
+			"requirement": ["REQ-UCC06-010"],
+			"actions": [
+				{
+					"step": "System attempts to record consent.",
+					"expectedResults": [
+						"System flags an error or retries consent recording.",
+						"User is informed of the issue or asked to try accepting again."
+					]
+				}
+			]
+		},
+		{
+			"testCaseId": "CMFO-0013",
+			"title": "Privacy Policy Modal Non-Interference",
+			"description": "Ensures Privacy Policy modal does not interfere with form fields.",
+			"preConditions": ["User accesses FO form for the first time."],
+			"requirement": ["REQ-UCC06-010"],
+			"actions": [
+				{
+					"step": "Privacy Policy modal appears.",
+					"expectedResults": [
+						"Form fields are not accessible or interactable until the modal is accepted or closed."
+					]
+				}
+			]
+		},
+		{
+			"testCaseId": "CMFO-0014",
+			"title": "Navigation with Unaccepted Policies",
+			"description": "Verifies navigation is restricted with unaccepted policies.",
+			"preConditions": [
+				"User accesses FO form for the first time and does not accept Privacy or Cookies Policies."
+			],
+			"requirement": ["REQ-UCC06-010", "REQ-UCC06-020"],
+			"actions": [
+				{
+					"step": "User tries to navigate to another section of the form.",
+					"expectedResults": [
+						"Navigation is blocked.",
+						"User is reminded to accept Policies to proceed."
+					]
+				}
+			]
+		}
+	]
+}
